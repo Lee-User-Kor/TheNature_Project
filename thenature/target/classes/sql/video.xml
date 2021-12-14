@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="video">
+	
+	<select id="treeVideoList" resultType="com.thenature.video.TreeVideoVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from tree_video order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="countContentsTv" resultType="int">
+		select count(*) from tree_video
+	</select>
+	
+	<select id="countContentsTa" resultType="int">
+		select count(*) from tree_ar
+	</select>
+	
+	<select id="treeArList" resultType="com.thenature.video.TreeArVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from tree_ar order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="selectTreeVideoForHome" resultType="com.thenature.video.TreeVideoVO">
+		select * from tree_video order by idx desc
+	</select>
+	
+	<insert id="tvWrite">
+		insert into 
+		tree_video(member_idx, writer, title, video_path, content, thumbnail) 
+		values(#{member_idx}, #{writer}, #{title}, #{video_path}, #{content}, #{thumbnail})
+	</insert>
+	
+	<insert id="tvWriteNoThumbnail">
+		insert into
+		tree_video(member_idx, writer, title, video_path, content)
+		values(#{member_idx}, #{writer}, #{title}, #{video_path}, #{content})
+	</insert>
+	
+	<insert id="taWrite">
+		insert into tree_ar(member_idx, writer, title, ar_path) values(#{member_idx}, #{writer}, #{title}, #{ar_path})
+	</insert>
+	
+	<select id="selectOneVideo" resultType="com.thenature.video.TreeVideoVO">
+		select * from tree_video where idx = #{obj}
+	</select>
+	
+	<delete id="deleteVideo">
+		delete from tree_video where idx = #{check}
+	</delete>
+	
+	<select id="deleteVideoCnt" resultType="int">
+		select count(*) from tree_video where idx = #{check}
+	</select>
+	
+	<select id="selectOneAr" resultType="com.thenature.video.TreeArVO">
+		select * from tree_ar where idx = #{obj}
+	</select>
+	
+	<delete id="deleteAr">
+		delete from tree_ar where idx = #{check}
+	</delete>
+	
+	<select id="deleteArCnt" resultType="int">
+		select count(*) from tree_ar where idx = #{check}
+	</select>
+	
+	<update id="updateVideoNoFile">
+		update tree_video
+		set title = #{title}, content = #{content}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateVideoWithThumbnail">
+		update tree_video
+		set title = #{title}, content = #{content}, thumbnail = #{thumbnail}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateVideoWithVideo">
+		update tree_video
+		set title = #{title}, content = #{content}, video_path = #{video_path}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateVideoWithFiles">
+		update tree_video
+		set title = #{title}, content = #{content}, video_path = #{video_path}, thumbnail = #{thumbnail}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateArByModi">
+		update tree_ar
+		set title = #{title}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateArWithPath">
+		update tree_ar
+		set title = #{title}, ar_path = #{ar_path}
+		where idx = #{idx}
+	</update>
+	
+</mapper>

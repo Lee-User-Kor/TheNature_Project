@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="image">
+	
+	<insert id="writeCommunityImage">
+		insert into image
+		(table_name, table_idx, img_path)
+		values
+		(#{table_name}, #{table_idx}, #{img_path})
+	</insert>
+	
+	<select id="selectCommunityDetailImage" resultType="com.thenature.image.ImageVO">
+		select * from image 
+		where table_name = 'board_community' and table_idx = #{obj}
+	</select>
+	
+	<insert id="addTcImage">
+		insert into image(table_name, table_idx, img_path) values(#{table_name}, #{table_idx}, #{img_path})
+	</insert>
+	
+	<select id="selectCommentaryDetailImage" resultType="com.thenature.image.ImageVO">
+		select * from image
+		where table_name = 'tree_commentary' and table_idx = #{obj}
+	</select>
+	
+	<select id="selectCommunityImgForHome" resultType="com.thenature.image.ImageVO">
+		select * from image
+		where table_name = 'board_community' and table_idx = #{idx}
+	</select>
+	
+	<select id="findCommunityImageForModi" resultType="com.thenature.image.ImageVO">
+		select * from image
+		where table_name = 'board_community' and table_idx = #{community_idx}
+	</select>
+	
+	<update id="updateCommunityImage">
+		update image
+		set img_path = #{img_path}
+		where table_name = #{table_name} and table_idx = #{table_idx}
+	</update>
+	
+	<select id="imageList"	resultType="com.thenature.image.ImageVO">
+		select * from image
+	</select>
+	
+	<update id="updateTreeCommentaryWithImage">
+		update image
+		set img_path = #{img_path}
+		where idx = #{idx}
+	</update>
+	
+	<select id="selectOneIdx" resultType="com.thenature.image.ImageVO">
+		select * from image where table_name = 'tree_commentary' and table_idx = #{updateIdx}
+	</select>
+	
+	<select id="findCommuImageList" resultType="com.thenature.image.ImageVO">
+		select * from image where table_name = 'board_community' and table_idx = #{idx}
+	</select>
+	
+</mapper>

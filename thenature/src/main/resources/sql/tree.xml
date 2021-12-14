@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="tree">
+
+	<select id="tcList" resultType="com.thenature.tree.TreeCommentaryVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from tree_commentary order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+
+	<select id="countContentsTc" resultType="int">
+		select count(*) from tree_commentary;
+	</select>
+	
+	<select id="getDetailCommentary" resultType="com.thenature.tree.TreeCommentaryVO">
+		select * from tree_commentary where idx = #{obj}
+	</select>
+	
+	<select id="countTreeCommentary" resultType="_int">
+		select count(*) from tree_commentary
+	</select>
+	
+	<select id="getRandomVO" resultType="com.thenature.tree.TreeCommentaryVO">
+		select * from tree_commentary where idx = #{obj}
+	</select>
+	
+	<insert id="writeTc">
+		insert into tree_commentary(member_idx, writer, tree_name, tree_name_english, tree_name_scientific, tree_kind01, tree_kind02, tree_kind03, tree_kind04, tree_locate, tree_size, content, thumnail, tree_audio) 
+		values(#{member_idx}, #{writer}, #{tree_name}, #{tree_name_english}, #{tree_name_scientific}, #{tree_kind01}, #{tree_kind02}, #{tree_kind03}, #{tree_kind04}, #{tree_locate}, #{tree_size}, #{content}, #{thumnail}, #{tree_audio})
+	</insert>
+	
+	<insert id="writeTcWithoutAudio">
+		insert into tree_commentary(member_idx, writer, tree_name, tree_name_english, tree_name_scientific, tree_kind01, tree_kind02, tree_kind03, tree_kind04, tree_locate, tree_size, content, thumnail) 
+		values(#{member_idx}, #{writer}, #{tree_name}, #{tree_name_english}, #{tree_name_scientific}, #{tree_kind01}, #{tree_kind02}, #{tree_kind03}, #{tree_kind04}, #{tree_locate}, #{tree_size}, #{content}, #{thumnail})
+	</insert>
+	
+	<select id="findTcIdx" resultType="int">
+		select idx from tree_commentary order by idx desc limit 1
+	</select>
+	
+	<delete id="deleteCommentary" parameterType="String">
+		delete from tree_commentary where idx = #{check}
+	</delete>
+	
+	<select id="deleteCommentaryCnt" resultType="int" parameterType="String">
+		select count(*) from tree_commentary where idx = #{check}
+	</select>
+	
+	<update id="updateTreeCommentaryNoFile">
+		update tree_commentary set
+		tree_name = #{tree_name}, tree_name_english = #{tree_name_english}, tree_name_scientific = #{tree_name_scientific}, 
+		tree_kind01 = #{tree_kind01}, tree_kind02 = #{tree_kind02}, tree_kind03 = #{tree_kind03}, tree_kind04 = #{tree_kind04}, 
+		tree_locate = #{tree_locate}, tree_size = #{tree_size}, content = #{content} where idx = #{idx}
+	</update>
+	
+	<update id="updateTreeCommentaryWithThumbnail">
+		update tree_commentary set
+		tree_name = #{tree_name}, tree_name_english = #{tree_name_english}, tree_name_scientific = #{tree_name_scientific}, 
+		tree_kind01 = #{tree_kind01}, tree_kind02 = #{tree_kind02}, tree_kind03 = #{tree_kind03}, tree_kind04 = #{tree_kind04}, 
+		tree_locate = #{tree_locate}, tree_size = #{tree_size}, content = #{content}, thumnail = #{thumnail} where idx = #{idx}
+	</update>
+	
+	<update id="updateTreeCommentaryWithAudio">
+		update tree_commentary set
+		tree_name = #{tree_name}, tree_name_english = #{tree_name_english}, tree_name_scientific = #{tree_name_scientific}, 
+		tree_kind01 = #{tree_kind01}, tree_kind02 = #{tree_kind02}, tree_kind03 = #{tree_kind03}, tree_kind04 = #{tree_kind04}, 
+		tree_locate = #{tree_locate}, tree_size = #{tree_size}, content = #{content}, tree_audio = #{tree_audio} where idx = #{idx}
+	</update>
+	
+	<select id="commentaryList" resultType="com.thenature.tree.TreeCommentaryVO">
+		select * from tree_commentary
+	</select>
+	
+	<update id="updateTreeCommentaryThumbnailAudio">
+		update tree_commentary set
+		tree_name = #{tree_name}, tree_name_english = #{tree_name_english}, tree_name_scientific = #{tree_name_scientific}, 
+		tree_kind01 = #{tree_kind01}, tree_kind02 = #{tree_kind02}, tree_kind03 = #{tree_kind03}, tree_kind04 = #{tree_kind04}, 
+		tree_locate = #{tree_locate}, tree_size = #{tree_size}, content = #{content}, thumnail = #{thumnail}, tree_audio = #{tree_audio} where idx = #{idx}
+	</update>
+	
+	<select id="countContentsCard" resultType="int">
+		select count(*) from tree_card
+	</select>
+	
+	<select id="countContentsCardCategory" resultType="int">
+		select count(category) from tree_card group by category
+	</select>
+	
+	<select id="treeCardList" resultType="com.thenature.tree.TreeCardVO">
+<!-- 		select * from (select @rownum:=@rownum+1 as num, n.* -->
+<!-- 		from(select * from tree_card order by idx asc)n, -->
+<!-- 		(select @rownum:=0)v)num where num.num between #{start} and #{end} -->
+		select * from tree_card order by idx asc
+	</select>
+	
+	<select id="fineCategory" resultType="String">
+		select category from (select @rownum:=@rownum+1 as num, n.*
+		from(select category from tree_card group by category)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="findCategoryAllInfo" resultType="com.thenature.tree.TreeCardVO">
+		select * from tree_card where category = #{string}
+	</select>
+	
+	<select id="adminTreeCardList" resultType="com.thenature.tree.TreeCardVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from tree_card order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<insert id="addTreeCard">
+		insert into tree_card(category, name, level, img_path) 
+		values(#{category}, #{name}, #{level}, #{img_path})
+	</insert>
+	
+	<select id="selectOneCard" resultType="com.thenature.tree.TreeCardVO">
+		select * from tree_card where idx = #{idx}
+	</select>
+	
+	<update id="modifyCardNoFile">
+		update tree_card set category = #{category}, name = #{name}, level = #{level} where idx = #{idx}
+	</update>
+	
+	<update id="modifyCardWithImg">
+		update tree_card set category = #{category}, name = #{name}, level = #{level}, img_path = #{img_path} where idx = #{idx}
+	</update>
+	
+	<delete id="deleteCard">
+		delete from tree_card where idx = #{check}
+	</delete>
+	
+	<select id="deleteCardCnt" resultType="int" parameterType="String">
+		select count(*) from tree_card where idx = #{check}
+	</select>
+	
+	<select id="getCount" resultType="String">
+		select category from tree_card group by category
+	</select>
+	
+</mapper>

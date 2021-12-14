@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+	
+	<insert id="communityDetailComment">
+		insert into board_comment
+		(table_name, table_idx, member_idx, writer, content)
+		values
+		(#{table_name}, #{table_idx}, #{member_idx}, #{writer}, #{content})
+	</insert>
+	
+	<select id="ajaxCommunityDetailComment" resultType="com.thenature.comment.CommentVO">
+		select * from board_comment
+		where table_name = #{table_name} and table_idx = #{table_idx} order by idx desc limit 1
+	</select>
+	
+	<select id="selectCommunityDetailCmt" resultType="com.thenature.comment.CommentVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_comment
+		where table_name = 'board_community' and table_idx = #{community_detail_idx} order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<update id="cmtModi">
+		update board_comment
+		set content = #{content}
+		where idx = #{idx}
+	</update>
+	
+	<delete id="cmtDel">
+		delete from board_comment
+		where idx = #{idx}
+	</delete>
+	
+	<select id="selectWebtoonDetailCmt" resultType="com.thenature.comment.CommentVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_comment
+		where table_name = 'board_webtoon_detail' and table_idx = #{webtoon_detail_idx} order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="selectRecentComment" resultType="com.thenature.comment.CommentVO">
+		select * from board_comment order by idx desc limit 10
+	</select>
+	
+	<select id="countContentsCmt" resultType="int">
+		select count(*) from board_comment
+	</select>
+	
+	<select id="allCommentList" resultType="com.thenature.comment.CommentVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_comment order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="countContentsWebtoonDetailComment" resultType="_int">
+		select count(*) from board_comment where table_name = 'board_webtoon_detail' and table_idx = #{idx}
+	</select>
+	
+	<select id="countContentsCommunityComment" resultType="_int">
+		select count(*) from board_comment where table_name = 'board_community' and table_idx = #{obj}
+	</select>
+	
+	<delete id="commentDelete">
+		delete from board_comment where idx = #{check}
+	</delete>
+	
+	<select id="commentDeleteCnt" resultType="int">
+		select count(*) from board_comment where idx = #{check}
+	</select>
+	
+	<select id="cntCommunityCmtForHome" resultType="_int">
+		select count(*) from board_comment where table_name = 'board_community' and table_idx = #{idx} 
+	</select>
+
+	<select id="cntWebtoonDetailCmt" resultType="_int">
+		select count(*) from board_comment where table_name = 'board_webtoon_detail' and table_idx = #{idx}
+	</select>
+	
+	<delete id="cmtDeleteAboutCommunity">
+		delete from board_comment where table_name = 'board_community' and table_idx = #{chkVal} 
+	</delete>
+	
+	<delete id="commentDeleteCommu">
+		delete from board_comment where table_name = 'board_community' and table_idx = #{check}
+	</delete>
+	
+	<delete id="commentDeleteWebtoon">
+		delete from board_comment where table_name = 'board_webtoon_detail' and table_idx = #{check}
+	</delete>
+	
+</mapper>

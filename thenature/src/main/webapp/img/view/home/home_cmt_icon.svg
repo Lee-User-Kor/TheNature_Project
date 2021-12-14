@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14.355" height="12.13" viewBox="0 0 14.355 12.13">
+  <g id="그룹_2392" data-name="그룹 2392" transform="translate(-415.883 -1753.688)">
+    <g id="그룹_1102" data-name="그룹 1102" transform="translate(420.129 1757.427)">
+      <g id="그룹_14" data-name="그룹 14" transform="translate(0 0)">
+        <ellipse id="타원_9" data-name="타원 9" cx="0.598" cy="0.598" rx="0.598" ry="0.598" fill="#c4cebc"/>
+      </g>
+      <g id="그룹_15" data-name="그룹 15" transform="translate(4.785 0)">
+        <ellipse id="타원_10" data-name="타원 10" cx="0.598" cy="0.598" rx="0.598" ry="0.598" fill="#c4cebc"/>
+      </g>
+      <g id="그룹_16" data-name="그룹 16" transform="translate(2.393 0)">
+        <ellipse id="타원_11" data-name="타원 11" cx="0.598" cy="0.598" rx="0.598" ry="0.598" fill="#c4cebc"/>
+      </g>
+    </g>
+    <path id="패스_5923" data-name="패스 5923" d="M611.3,169.313h0l-13.061-.006a.31.31,0,0,0-.311.308h0v8.018a.31.31,0,0,0,.311.308h1.555v2.031l2.048-2.026H611.3a.309.309,0,0,0,.311-.308h0v-8.018A.309.309,0,0,0,611.3,169.313Z" transform="translate(-181.648 1584.578)" fill="#c4cebc"/>
+    <g id="그룹_17" data-name="그룹 17" transform="translate(415.883 1753.688)">
+      <g id="그룹_13" data-name="그룹 13" transform="translate(0 0)">
+        <path id="패스_9" data-name="패스 9" d="M1.794,16.13V13.372H.9a.889.889,0,0,1-.9-.879V4.879A.889.889,0,0,1,.9,4H13.458a.889.889,0,0,1,.9.879v7.615a.889.889,0,0,1-.9.879H4.61ZM.9,4.586a.3.3,0,0,0-.3.293v7.615a.3.3,0,0,0,.3.293h1.5v1.929l1.97-1.929h9.1a.3.3,0,0,0,.3-.293V4.879a.3.3,0,0,0-.3-.293Z" transform="translate(0 -4)" fill="#c4cebc"/>
+      </g>
+      <g id="그룹_14-2" data-name="그룹 14" transform="translate(4.187 4.091)">
+        <ellipse id="타원_9-2" data-name="타원 9" cx="0.598" cy="0.598" rx="0.598" ry="0.598" fill="#f7f7f7"/>
+      </g>
+      <g id="그룹_15-2" data-name="그룹 15" transform="translate(8.972 4.091)">
+        <ellipse id="타원_10-2" data-name="타원 10" cx="0.598" cy="0.598" rx="0.598" ry="0.598" fill="#f7f7f7"/>
+      </g>
+      <g id="그룹_16-2" data-name="그룹 16" transform="translate(6.579 4.091)">
+        <ellipse id="타원_11-2" data-name="타원 11" cx="0.598" cy="0.598" rx="0.598" ry="0.598" fill="#f7f7f7"/>
+      </g>
+    </g>
+  </g>
+</svg>

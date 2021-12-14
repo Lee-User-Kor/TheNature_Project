@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="webtoondetail">
+	
+	<select id="adminWebtoonList" resultType="com.thenature.webtoon.WebtoonDetailVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_webtoon_detail order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<insert id="writeWebtoonDetail">
+		insert into board_webtoon_detail
+		(bw_title, title, round, writer, member_idx, thumbnail, img_path)
+		values 
+		(#{bw_title}, #{title}, #{round}, #{writer}, #{member_idx}, #{thumbnail}, #{img_path})
+	</insert>
+	
+	<select id="selectRecentWebtoonDetail" resultType="com.thenature.webtoon.WebtoonDetailVO">
+		select * from board_webtoon_detail order by idx desc limit 10
+	</select>
+	
+	<select id="selectWebtoonDetailList" resultType="com.thenature.webtoon.WebtoonDetailVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_webtoon_detail where bw_title = #{title} order by round desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="selectWebtoonDetail" resultType="com.thenature.webtoon.WebtoonDetailVO">
+		select * from board_webtoon_detail where bw_title = #{bw_title} and round = #{round}
+	</select>
+	
+	<select id="maxRound" resultType="_int">
+		select count(*) from board_webtoon_detail where bw_title = #{bw_title}
+	</select>
+	
+	<update id="plusViewCntWebtoonDetail">
+		update board_webtoon_detail
+		set view_count = #{view_count}
+		where idx = #{idx}
+	</update>
+	
+	<select id="countContentsWebtoonDetail" resultType="_int">
+		select count(*) from board_webtoon_detail
+	</select>
+	
+	<delete id="webtoonDelete">
+		delete from board_webtoon_detail where idx = #{check}
+	</delete>
+
+	<select id="webtoonDeleteCnt" resultType="int">
+		select count(*) from board_webtoon_detail where idx = #{check}
+	</select>
+	
+	<select resultType="com.thenature.webtoon.WebtoonDetailVO" id="selectByEachWebtoonForHome">
+		select * from board_webtoon_detail where bw_title = #{title} 
+	</select>
+
+	<select resultType="com.thenature.webtoon.WebtoonDetailVO" id="findWebtoonDetailByCmt">
+		select * from board_webtoon_detail where idx = #{table_idx} 
+	</select>
+	
+	<select id="selectTitleWebtoonDetail" resultType="com.thenature.webtoon.WebtoonDetailVO">
+		select * from board_webtoon_detail
+	</select>
+	
+	<select id="findWebtoonByIdx" resultType="com.thenature.webtoon.WebtoonDetailVO">
+		select * from board_webtoon_detail where idx = #{webtoon_detail_idx}
+	</select>
+	
+	<update id="updateWebtoonNoFile">
+		update board_webtoon_detail
+		set title = #{title}, round = #{round}, bw_title = #{bw_title}
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateWebtoonWithThumbnail">
+		update board_webtoon_detail
+		set title = #{title}, round = #{round}, bw_title = #{bw_title}, thumbnail = #{thumbnail}	
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateWebtoonWithContent">
+		update board_webtoon_detail
+		set title = #{title}, round = #{round}, bw_title = #{bw_title}, img_path = #{img_path}	
+		where idx = #{idx}
+	</update>
+	
+	<update id="updateWebtoonWithFiles">
+		update board_webtoon_detail
+		set title = #{title}, round = #{round}, bw_title = #{bw_title}, img_path = #{img_path}, thumbnail = #{thumbnail}	
+		where idx = #{idx}
+	</update>
+	
+</mapper>

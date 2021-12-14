@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="qna">
+
+	<select id="countContentsQna" resultType="int">
+		select count(*) from board_qna;
+	</select>
+	
+	<select id="countContentsBySearchQna" resultType="int">
+		select count(*) from board_qna where title like CONCAT('%',#{search_keyword},'%')
+	</select>
+
+	<select id="getAllQna" resultType="com.thenature.inquiry.QnaVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_qna order by idx desc)n, 
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}	
+	</select>
+
+	<select id="getSearchQna" resultType="com.thenature.inquiry.QnaVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_qna where title like CONCAT('%',#{search_keyword},'%') order by idx desc)n, 
+		(select @rownum:=0)v)num where num.num between #{start} and #{end} 
+	</select>
+	
+	<select id="getDetailQna" resultType="com.thenature.inquiry.QnaVO">
+		select * from board_qna where idx = #{obj}
+	</select>
+	
+	<select id="selectRecentQna" resultType="com.thenature.inquiry.QnaVO">
+		select * from board_qna
+		order by idx desc limit 10
+	</select>
+	
+	<select id="addQna" resultType="com.thenature.inquiry.QnaVO">
+		insert into board_qna(member_idx, writer, title, content)
+		values(#{member_idx}, #{writer}, #{title}, #{content});
+	</select>
+	
+	<update id="modifyQna">
+		update board_qna set title = #{title}, content = #{content} where idx = #{idx}
+	</update>
+	
+	<delete id="deleteQna">
+		delete from board_qna where idx = #{obj}
+	</delete>
+	
+	<update id="addApply">
+		update board_qna set apply_content = #{apply_content}, apply = 'y' where idx = #{idx}
+	</update>
+	
+	<update id="qnaApplyModify">
+		update board_qna set apply_content = #{apply_content} where idx = #{idx}
+	</update>
+	
+	<delete id="qnaDelete">
+		delete from board_qna where idx = #{check}
+	</delete>
+
+	<select id="qnaDeleteCnt" resultType="int">
+		select count(*) from board_qna where idx = #{check}
+	</select>
+	
+	<update id="qnaDeleteApply">
+		update board_qna set apply = 'n', apply_content = null where idx = #{check}
+	</update>
+	
+	<select id="qnaDeleteApplyCnt" resultType="int">
+		select count(*) from board_qna where idx = #{check}
+	</select>
+	
+	
+</mapper>

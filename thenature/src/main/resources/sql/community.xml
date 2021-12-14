@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="community">
+	
+	<select id="selectMyPosting" resultType="com.thenature.community.CommunityVO">
+		select * from board_community
+		where member_idx = #{idx} order by idx desc
+	</select>
+	
+	<select id="selectCommunity" resultType="com.thenature.community.CommunityVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_community order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<insert id="writeCommunity">
+		insert into board_community
+		(member_idx, writer, title, content)
+		values
+		(#{member_idx}, #{writer}, #{title}, #{content})
+	</insert>
+	
+	<select id="findIdxForCommunity" resultType="com.thenature.community.CommunityVO">
+		select * from board_community
+		where member_idx = #{member_idx} and title = #{title} and content = #{content}
+	</select>
+	
+	<select id="selectRecentCommunity" resultType="com.thenature.community.CommunityVO">
+		select * from board_community
+		order by idx desc limit 10
+	</select>
+	
+	<select id="selectCommunityDetail" resultType="com.thenature.community.CommunityVO">
+		select * from board_community
+		where idx = #{obj}
+	</select>
+	
+	<update id="plusViewCnt">
+		update board_community
+		set view_count = #{view_count}
+		where idx = #{idx}
+	</update>
+	
+	<select id="selectCommunityForHome" resultType="com.thenature.community.CommunityVO">
+		select * from board_community order by idx desc limit 3	
+	</select>
+	
+	<select id="countContentsCommunity" resultType="_int">
+		select count(*) from board_community
+	</select>
+	
+	<select id="countContentsCommu" resultType="int">
+		select count(*) from board_community
+	</select>
+	
+	<delete id="deleteCommunity">
+		delete from board_community where idx = #{check}
+	</delete>
+	
+	<select id="deleteCommunityCnt" resultType="int">
+		select count(*) from board_community where idx = #{check}	
+	</select>
+	
+	<select id="selectTitleCommu" resultType="com.thenature.community.CommunityVO">
+		select * from board_community
+	</select>
+	
+	<select id="countContentsCommunityBySearch" resultType="_int">
+		select count(*) from board_community where title like CONCAT('%',#{search_keyword},'%')
+	</select>
+	
+	<select id="selectSearchCommunity" resultType="com.thenature.community.CommunityVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_community where title like CONCAT('%',#{search_keyword},'%') order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="findCommunityByIdx" resultType="com.thenature.community.CommunityVO">
+		select * from board_community where idx = #{community_idx}
+	</select>
+	
+	<update id="updateCommunityByModi">
+		update board_community
+		set title = #{title}, content = #{content}
+		where idx = #{idx}
+	</update>
+	
+	<select resultType="com.thenature.community.CommunityVO" id="selectMyPostingWithPag">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_community where member_idx = #{member_idx} order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end} 
+	</select>
+	
+	<select id="selectCommunityList" resultType="com.thenature.community.CommunityVO">
+		select * from board_community
+	</select>
+	
+</mapper>

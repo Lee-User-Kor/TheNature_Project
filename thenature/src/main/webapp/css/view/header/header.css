@@ -1,0 +1,89 @@
+header{
+	width: 100%;
+    float: left;
+    position: relative;
+    color: #272727;
+    font-weight: bold;
+}
+
+header .logo_area{
+	float: left;
+    width: 13%;
+    margin-left: 6%;
+    margin-bottom: 3%;
+}
+
+header .logo_area a img{
+	width: 100%;
+}
+
+header .menu_area{
+	float: right;
+    font-size: 0.9em;
+    margin-top: 1%;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 6%;
+}
+
+header .menu_area ul{
+	list-style: none;
+    display: flex;
+    width: 45%;
+    justify-content: flex-end;
+}
+
+header .menu_area li{
+	border-right: solid;
+    border-width: 1px;
+    border-color: #707070;
+    width: auto;
+    padding: 0 2.5%;
+}
+
+header .menu_area li a{
+	text-decoration: none;
+    color: #484848;
+}
+
+header .menu_area li img{
+	width: auto;
+}
+
+header nav{
+	position: absolute;
+    width: 45%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    z-index: 3000;
+}
+
+header nav ul{
+	list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+header nav ul li {
+    width: max-content;
+    padding: 0 5%;
+}
+
+header nav ul li a{
+	text-decoration: none;
+    color: #272727;
+}
+
+header .hidden_menu{
+	display: none;
+	position: absolute;
+    width: 100%;
+    height: 130px;
+    left: 0;
+    bottom: 0;
+    transform: translate(0, 100%);
+    flex-direction: row;
+}

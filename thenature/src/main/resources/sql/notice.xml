@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+
+	<select id="countContents" resultType="int">
+		select count(*) from board_notice
+	</select>
+
+	<select id="getAllNotice" resultType="com.thenature.inquiry.NoticeVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_notice order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="getSearchNotice" resultType="com.thenature.inquiry.NoticeVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from board_notice where title like CONCAT('%',#{search_keyword},'%') order by idx desc)n, 
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<select id="countContentsBySearch" resultType="int">
+		select count(*) from board_notice where title like CONCAT('%',#{search_keyword},'%')
+	</select>
+	
+	<select id="getDetailNotice" resultType="com.thenature.inquiry.NoticeVO">
+		select * from board_notice where idx = #{obj}
+	</select>
+	
+	<update id="plusDetailNoticeCount">
+		update board_notice set view_count = #{view_count} where idx = #{idx}
+	</update>
+	
+	<select id="getLastIdx" resultType="int">
+		select idx from board_notice order by idx desc limit 1
+	</select>
+	
+	<insert id="addNotice">
+		insert into board_notice(member_idx, writer, title, content) 
+		values(#{member_idx}, #{writer}, #{title}, #{content})
+	</insert>
+	
+	<update id="modifyNotice">
+		update board_notice set title = #{title}, content = #{content} where idx = #{idx} 
+	</update>
+	
+	<delete id="deleteNotice">
+		delete from board_notice where idx = #{check}
+	</delete>
+	
+	<select id="deleteNoticeCnt" resultType="int">
+		select count(*) from board_notice where idx = #{check}
+	</select>
+	
+</mapper>

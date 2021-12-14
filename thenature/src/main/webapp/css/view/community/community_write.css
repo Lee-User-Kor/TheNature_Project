@@ -1,0 +1,198 @@
+section {
+	width: 100%;
+    float: left;
+}	    
+.dropZone_text {
+	text-align: center;
+	margin-top: 120px;
+	color: #bfbfbf;
+}
+.board_cm_write_top {
+	height: 250px;
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.board_cm_write_top_right_logo {
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.board_cm_write_top_right_logo > p {
+	margin: 10px 0;
+}
+.board_cm_write_top_welcome {
+    width: 500px;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: auto;
+    margin-top: 15px;
+    padding: 25px 0;
+    border-radius: 20px;
+}
+.board_cm_write_mid {
+	width: 85%;
+	margin: auto;
+	margin-top: 45px;
+}
+.board_cm_write_mid_title {
+	display: flex;
+	margin-bottom: 35px;
+}
+.board_cm_write_mid_title_text {
+    width: 8%;
+    color: #5C8E46;
+    border-bottom: 4px solid #5C8E46;
+    padding-bottom: 15px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.board_cm_write_mid_title_blank {
+    width: 92%;
+    border-bottom: 1px solid #707070;
+    box-sizing: border-box;
+}
+.board_cm_write_table {
+	border-collapse: collapse;
+	border: 1px solid black;
+	border-left: none;
+	border-right: none;
+	width: 100%;
+}
+.board_cm_write_table > tbody > tr > th, .board_cm_write_table > tbody > tr > td {
+	padding: 15px;
+}
+.board_cm_write_table > tbody > tr > th {
+	padding: 25px;
+	background-color: #dadada;
+	width: 100px;
+}
+.board_cm_write_table > tbody > tr > td {
+	padding: 10px 15px 10px 15px;
+}
+.td_inner_input_title {
+	width: 99%;
+	height: 50px;
+	border: 1px solid #dadada;
+}
+.td_inner_textarea {
+	resize: none;
+	width: 99%;
+	height: 170px;
+	border: 1px solid #dadada;
+}
+.board_cm_write_bot {
+	width: 85%;
+	margin: auto;
+	margin-top: 35px;
+}
+.go_save_btn, .go_list_btn {
+	width: 75px;
+	height: 35px;
+	outline: none;
+}
+.go_save_btn {
+	margin-right: 10px;
+	border: none;
+	background-color: #5C8E46;
+	color: white;
+	font-weight: bold;
+	font-size: 13pt;
+}
+.go_list_btn {
+	margin-right: 15px;
+	border: 1px solid #5C8E46;
+	background-color: white;
+	color: #5C8E46;
+	font-weight: bold;
+	font-size: 13pt;
+}
+.go_save_btn, .go_list_btn:hover {
+	cursor:pointer; 
+}
+/* ############################# */
+/* 드래그앤드롭 */
+/* ############################# */
+.dragAndDropDiv {
+    border: 1px solid #dadada;
+    width: 99%;
+    height: 200px;
+    color: #bfbfbf;
+    text-align: center;
+	line-height: 200px;
+    padding: 10px 2px 10px 2px;
+    font-size:100%;
+    display: table-cell;
+}
+.progressBar {
+    width: 200px;
+    height: 22px;
+    border: 1px solid #ddd;
+    border-radius: 5px; 
+    overflow: hidden;
+    display:inline-block;
+    margin:0px 10px 5px 5px;
+    vertical-align:top;
+}
+ 
+.progressBar div {
+    height: 100%;
+    color: #fff;
+    text-align: right;
+    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+    width: 0;
+    background-color: #0ba1b5; border-radius: 3px; 
+}
+.statusbar{
+	width: 99%;
+    border:1px solid #dadada;
+    border-top:none;
+    min-height:25px;
+    padding:10px 2px 0px 2px;
+    vertical-align:top;
+    display: flex;
+    justify-content: space-between;
+}
+.statusbar:nth-child(odd){
+    background:#EBEFF0;
+}
+.filename{
+    display:inline-block;
+    vertical-align:top;
+    width:250px;
+}
+.filesize{
+    display:inline-block;
+    vertical-align:top;
+    color:#30693D;
+    width:100px;
+    margin-left:10px;
+    margin-right:5px;
+}
+.abort{
+    background-color:#A8352F;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    border-radius:4px;display:inline-block;
+    color:#fff;
+    font-family:arial;font-size:13px;font-weight:normal;
+    padding:4px 15px;
+    cursor:pointer;
+    vertical-align:top
+}
+.fileUpload_icon {
+	text-align: center;
+	border: 1px solid #dadada;
+	border-top: none;
+	padding: 2px;
+	width: 99%;
+}
+.fileUpload_icon_img {
+	margin-top: 5px;
+}
+/* ############################# */
+/* 드래그앤드롭 END */
+/* ############################# */

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<select id="checkId" resultType="com.thenature.member.MemberVO">
+		select * from member where id = #{id}
+	</select>
+	
+	<insert id="joinMemberAgreeAll">
+		insert into member (id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email)
+		values (#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'y', 'y')
+	</insert>
+	
+	<insert id="joinMemberAgreeSns">
+		insert into member (id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email)
+		values (#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'y', 'n')
+	</insert>
+	
+	<insert id="joinMemberAgreeEmail">
+		insert into member (id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email)
+		values (#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'n', 'y')
+	</insert>
+	
+	<insert id="joinMemberAgreeNecessary">
+		insert into member (id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email)
+		values (#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'n', 'n')
+	</insert>
+	
+	<select id="loginNormal" resultType="com.thenature.member.MemberVO">
+		select * from member where id = #{id} and pw = #{pw} and grade = 1 and exit_yn = 'n'
+	</select>
+	
+	<select id="loginProducer" resultType="com.thenature.member.MemberVO">
+		select * from member 
+		where id = #{id} and pw = #{pw} and grade = 2 and exit_yn = 'n' 
+		or id = #{id} and pw = #{pw} and grade = 3 and exit_yn = 'n'
+		or id = #{id} and pw = #{pw} and grade = 1 and is_producer = 'y' and exit_yn = 'n'
+	</select>
+	
+	<update id="changeInfo">
+		update member
+		set post = #{post}, address = #{address}, address_detail = #{address_detail}, email = #{email}
+		where idx = #{idx}
+	</update>
+	
+	<update id="dropMember">
+		update member
+		set exit_date = date_format(now(), '%Y-%m-%d'), exit_yn = 'y'
+		where idx = #{memberIdx}
+	</update>
+	
+	<select id="selectUser" resultType="com.thenature.member.MemberVO">
+		select * from member
+		where idx = #{idx} and pw = #{pw}
+	</select>
+	
+	<update id="changePw">
+		update member
+		set pw = #{pw}
+		where idx = #{idx}
+	</update>
+	
+	<select id="selectMyPoint" resultType="com.thenature.member.PointVO">
+		select * from point where member_idx = #{idx} order by idx desc
+	</select>
+	
+	<select id="selectMyPresent" resultType="com.thenature.member.PresentVO">
+		select * from present_check where member_idx = #{idx} order by idx desc
+	</select>
+	
+	<insert id="addPresent">
+		insert into present_check(member_idx) values(#{idx})
+	</insert>
+	
+	<insert id="addPoint">
+		insert into point(member_idx, point, content, point_what) values(#{member_idx}, #{point}, #{content}, #{point_what})
+	</insert>
+	
+	<select id="findId" resultType="com.thenature.member.MemberVO">
+		select id from member where name = #{m_name} and email = #{e_id}
+	</select>
+	
+	<select id="findPw" resultType="com.thenature.member.MemberVO">
+		select * from member where id = #{m_id} and email = #{e_id}
+	</select>
+	
+	<select id="allMember" resultType="com.thenature.member.MemberVO">
+		select * from member
+	</select>
+	
+	<select id="countCommunity" resultType="_int">
+		select count(*) from board_community where member_idx = #{idx}
+	</select>
+	
+	<select id="presentCheckCntByMember" resultType="_int">
+		select count(*) from present_check where member_idx = #{idx}
+	</select>
+	
+	<select id="selectAllForAdmin" resultType="com.thenature.member.MemberVO">
+		select * from (select @rownum:=@rownum+1 as num, n.*
+		from(select * from member order by idx desc)n,
+		(select @rownum:=0)v)num where num.num between #{start} and #{end}
+	</select>
+	
+	<insert id="joinMemberAgreeNecessaryProducer">
+		insert into member
+		(id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email, is_producer)
+		values 
+		(#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'n', 'n', #{is_producer})
+	</insert>
+	
+	<insert id="joinMemberAgreeSnsProducer">
+		insert into member 
+		(id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email, is_producer)
+		values 
+		(#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'y', 'n', #{is_producer})
+	</insert>
+	
+	<insert id="joinMemberAgreeEmailProducer">
+		insert into member 
+		(id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email, is_producer)
+		values 
+		(#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'n', 'y', #{is_producer})	
+	</insert>
+	
+	<insert id="joinMemberAgreeAllProducer">
+		insert into member 
+		(id, pw, name, tel, email, post, address, address_detail, agree_sns, agree_email, is_producer)
+		values 
+		(#{id}, #{pw}, #{name}, #{tel}, #{email}, #{post}, #{address}, #{address_detail}, 'y', 'y', #{is_producer})
+	</insert>
+	
+	<select id="countContentsMember" resultType="_int">
+		select count(*) from member
+	</select>
+	
+	<update id="gradeUp">
+		update member
+		set grade = grade + 1
+		where idx = #{chkVal}
+	</update>
+	
+	<update id="gradeDown">
+		update member
+		set grade = grade - 1
+		where idx = #{chkVal}
+	</update>
+	
+	<select id="checkAdmin" resultType="com.thenature.member.MemberVO">
+		select * from member where idx = #{chkVal}
+	</select>
+	
+</mapper>

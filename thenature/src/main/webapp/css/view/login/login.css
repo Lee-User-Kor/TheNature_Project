@@ -1,0 +1,122 @@
+	section {
+		width: 100%;
+	    float: left;
+	    color: #272727;
+	}
+	
+	.board_cm_write_top {
+		height: 250px;
+	    background-position: center;
+	    background-size: 100%;
+	    background-repeat: no-repeat;
+	}
+	.board_cm_write_top_right_logo {
+	    color: white;
+	    margin: 10px;
+	    font-size: 20px;
+	    display: flex;
+	    justify-content: flex-end;
+	}
+	.board_cm_write_top_right_logo > p {
+		margin: 10px 0;
+	}
+	.board_cm_write_top_welcome {
+	    width: 500px;
+	    text-align: center;
+	    color: white;
+	    background-color: rgba(0, 0, 0, 0.3);
+	    margin: auto;
+	    margin-top: 15px;
+	    padding: 25px 0;
+	    border-radius: 20px;
+	}
+	
+	.login_wrap {
+		display: flex;
+		justify-content: center;
+		padding: 80px;
+	}
+	.login_mid_div {
+		border-right: 1px solid #707070;
+		margin-left: 80px;
+		margin-right: 80px;
+	}
+	.login_left_div_inner_top, .login_right_div_inner_top {
+		text-align: center;
+		margin-bottom: 30px;
+	}
+	.login_left_div_inner_mid, .login_right_div_inner_mid {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+	.icon {
+		width: 60px;
+		height: 60px;
+	}
+	.icon:hover {
+		cursor: pointer;
+	}
+	.login_left_div_inner_bot, .login_right_div_inner_bot {
+		display: flex;
+		justify-content: center;
+		text-align: center;
+	}
+	.login_div_span {
+		font-size: 20pt;
+	}
+	.login_left_div_inner_mid_inner_left, .login_right_div_inner_mid_inner_left {
+		margin-right: 15px;
+	}
+	.login_left_div_inner_mid_inner_left_inner_top, .login_right_div_inner_mid_inner_left_inner_top {
+		margin-bottom: 15px;
+	}
+	.login_left_div_inner_mid_inner_left_inner_mid, .login_right_div_inner_mid_inner_left_inner_mid {
+		margin-bottom: 5px;	
+	}
+	.login_left_div_inner_mid_inner_left > div > input, .login_right_div_inner_mid_inner_left > div > input {
+		width: 400px;
+		height: 35px;
+	}
+	.login_left_div_inner_mid_inner_left_inner_bot, .login_right_div_inner_mid_inner_left_inner_bot {
+		font-size: 8pt;
+	}
+	.save_checkbox {
+		width: 11px;
+		height: 11px;
+		margin-left: 0;
+	}
+	.login_btn {
+		width: 120px;
+		height: 100px;		
+		font-weight: bold;
+		font-size: 13pt;
+		background-color: #35600C;
+		border: none;
+		border-radius: 10px;
+		color: white;
+	}
+	.login_btn:hover {
+		cursor: pointer;
+	}
+	.login_left_div_inner_bot, .login_right_div_inner_bot {
+		border-top: 1px solid #707070;
+	}
+	.login_left_div_inner_bot_inner_mid, .login_right_div_inner_bot_inner_mid {
+		border-right: 1px solid #707070;
+	}
+	.login_left_div_inner_bot_inner_left, .login_left_div_inner_bot_inner_right, .login_right_div_inner_bot_inner_left, .login_right_div_inner_bot_inner_right {
+		padding: 30px;
+		width: 50%;
+	}
+	.login_left_div_inner_bot_inner_left_inner_top, .login_left_div_inner_bot_inner_right_inner_top, .login_right_div_inner_bot_inner_left_inner_top, .login_right_div_inner_bot_inner_right_inner_top {
+		margin-bottom: 5px;
+	}
+	.bot_btn {
+		background-color: white;
+		border: 1px solid rgb(133,133,133);
+		border-radius: 2px;
+	}
+	.bot_btn:hover {
+		cursor: pointer;
+	}
